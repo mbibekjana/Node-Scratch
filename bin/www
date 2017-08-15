@@ -1,0 +1,50 @@
+#!/usr/bin/nodejs
+var debug = require('debug')('my-application');
+var app = require('../app');
+var models = require('../models');
+var config = require('../config/config.json');
+///db setup
+var Sequelize = require("sequelize");
+const sequelize = new Sequelize(
+config.development.database,  
+    config.development.username,  
+    config.development.password, {
+  host: 'localhost',
+ dialect: 'mysql',
+
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
+
+  // SQLite only
+  //storage: 'path/to/database.sqlite'
+});
+
+  sequelize.authenticate().then(() => {
+   console.log('Connection has been established successfully.');
+  }).catch(err => {
+   console.log('Connection not established .');
+  });
+	
+///db setupend
+app.set('port', process.env.PORT || 3000);
+
+
+  
+
+var server = app.listen(app.get('port'), function() {
+	
+	models.sequelize.sync().then(() => {
+   console.log('model load');
+  }
+
+	
+	)
+    .catch(function (e) {
+        throw new Error(e);
+    });
+	console.log('Express server listening on port ' + server.address().port);
+  debug('Express server listening on port ' + server.address().port);
+});
