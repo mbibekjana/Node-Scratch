@@ -11,10 +11,11 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 exports.signinview = function(req, res, next){
-	res.render('login/index');
+	res.render('login/index',{ csrfToken: req.csrfToken() });
 }
 
 exports.signin = function(req, res, next) {
+	
 	 passport.authenticate('local', { successRedirect: '/',
                           failureRedirect: '/signin'}, function(err, user, info) {
       if(err) {

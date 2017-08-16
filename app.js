@@ -21,6 +21,7 @@ var bcrypt 				= require('bcrypt-nodejs');
 var passport          	= require('passport');
 var LocalStrategy     	= require('passport-local').Strategy;
 var partials 			= require('express-partial');
+var csrf 				= require('csurf');
 
 
 var models 				= require('./models'); 
