@@ -51,7 +51,7 @@ sequelize init
 
 http://docs.sequelizejs.com/manual/tutorial/models-usage.html
 
-##Author
+## Author
 
 Bibekananda Jana.
 
